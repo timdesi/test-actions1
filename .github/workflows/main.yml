@@ -32,6 +32,7 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/cloudagent/cmd/azure/target/natives/linux-arm64
           ls -l
+          mkdir -p /home/runner/work/cloudagent
           cp -a * /home/runner/work/cloudagent
         
       - uses: actions/checkout@v2
