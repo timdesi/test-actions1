@@ -22,11 +22,13 @@ jobs:
           repository: bosch/swdc-os-cloud-agent
           path: cloudagent
           token: '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'
-          ref: 'main'
+          ref: 'add_build_actions'
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Hello, world!
+        run: | 
+          cd $GITHUB_WORKSPACE/cloudagent
+          ls -l 
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
