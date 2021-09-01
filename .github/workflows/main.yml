@@ -33,7 +33,7 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/cloudagent/cmd/azure/target/natives/linux-arm64
           ls -l
-           cp -rf cloudagent /home/ubuntu/runner
+           cp -rf cloudagent /home/runner/work
           
       - uses: actions/checkout@v2
       - run: |
@@ -42,7 +42,7 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add generated.txt
-          git add $GITHUB_WORKSPACE/cloudagent/cmd/azure/target/natives/linux-arm64/cloudagent
+          git add /home/runner/work/cloudagent
           git commit -m "generated"
           git push
 
