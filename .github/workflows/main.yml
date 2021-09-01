@@ -36,10 +36,12 @@ jobs:
           
       - uses: actions/checkout@v2
       - run: |
+          cd .github
           date > generated.txt
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add .
+          git add generated.txt
+          git add $GITHUB_WORKSPACE/cloudagent/cmd/azure/target/natives/linux-arm64/cloudagent
           git commit -m "generated"
           git push
 
