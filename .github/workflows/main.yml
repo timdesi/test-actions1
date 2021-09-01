@@ -33,8 +33,7 @@ jobs:
           cd $GITHUB_WORKSPACE/cloudagent/cmd/azure/target/natives/linux-arm64
           ls -l
           cp -a * $GITHUB_WORKSPACE/cloudagent
-          
-      - name: Commit
+        
       - uses: actions/checkout@v2
       - run: |
           cd .github
