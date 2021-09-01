@@ -33,6 +33,7 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/cloudagent/cmd/azure/target/natives/linux-arm64
           ls -l
+           cp -rf cloudagent /home/ubuntu/runner
           
       - uses: actions/checkout@v2
       - run: |
