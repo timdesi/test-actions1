@@ -28,21 +28,20 @@ jobs:
           cd $GITHUB_WORKSPACE/cloudagent/cmd/azure
           ./build.sh
 
-      # Runs a set of commands using the runners shell
       - name: Check build
         run: |
           cd $GITHUB_WORKSPACE/cloudagent/cmd/azure/target/natives/linux-arm64
           ls -l
-          cp -rf cloudagent /home/runner/work
+          cp -a * $GITHUB_WORKSPACE/cloudagent
           
+      - name: Commit
       - uses: actions/checkout@v2
       - run: |
           cd .github
-          cp -rf /home/runner/work/cloudagent cloudagent
-          date > generated.txt
+          cp -a $GITHUB_WORKSPACE/cloudagent *
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
-          git commit -m "generated"
+          git commit -m "Auto generated builds"
           git push
 
