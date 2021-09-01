@@ -14,7 +14,7 @@ jobs:
         with :
           repository: bosch/swdc-os-cloud-agent
           path: cloudagent
-          token: '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'
+          token: ${{ secrets.BUILD_CLOUD_AGENT }}
           ref: 'add_build_actions'
 
       - name: Set up Go
