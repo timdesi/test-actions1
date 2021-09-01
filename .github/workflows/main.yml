@@ -21,7 +21,7 @@ jobs:
         with :
           repository: timdesi/test-go1
           path: test-go1
-          token: ${{ secrets.TESTGO1 }}
+          token: test-go1
           ref: 'main'
 
       # Runs a single command using the runners shell
