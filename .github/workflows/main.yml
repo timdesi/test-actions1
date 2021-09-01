@@ -32,13 +32,12 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/cloudagent/cmd/azure/target/natives/linux-arm64
           ls -l
-          mkdir -p /tmp/cloudagent
-          cp -a * /tmp/cloudagent
+          cp -a * /home/runner/work/cloudagent
         
       - uses: actions/checkout@v2
       - run: |
           cd .github
-          cp -a /tmp/cloudagent *
+          cp -a /home/runner/work/cloudagent *
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
