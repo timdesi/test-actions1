@@ -19,9 +19,9 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
         with :
-          repository: timdesi/test-go1
-          path: test-go1
-          token: test-go1
+          repository: bosch/swdc-os-cloud-agent
+          path: cloudagent
+          token: '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'
           ref: 'main'
 
       # Runs a single command using the runners shell
