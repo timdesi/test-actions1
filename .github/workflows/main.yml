@@ -33,3 +33,13 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/cloudagent/cmd/azure/target/natives/linux-arm64
           ls -l
+          
+      - name: Commit
+      - uses: actions/checkout@v2
+          git config --global user.name 'Your Name'
+          git config --global user.email 'your-username@users.noreply.github.com'
+          git add $GITHUB_WORKSPACE/cloudagent/cmd/azure/target/natives/linux-arm64/cloudagent
+          git commit -am "Automated report"
+          git push
+      
+
