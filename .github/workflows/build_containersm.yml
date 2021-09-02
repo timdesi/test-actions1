@@ -24,7 +24,7 @@ jobs:
 
       - name: Install deps
         run: |
-          sudo apt install -y protobuf-compiler
+          sudo apt install libprotobuf-dev protobuf-compiler golang-goprotobuf-dev -y
           protoc --version
         
       # Runs a single command using the runners shell
