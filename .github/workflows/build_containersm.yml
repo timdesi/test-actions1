@@ -34,12 +34,12 @@ jobs:
           make clean
           make build-targets-archive
       
-      #- name: Check build
-      #  run: |
-      #    cd $GITHUB_WORKSPACE/cloudagent/cmd/azure/target/natives/linux-arm64
-      #    ls -l
-      #    mkdir -p /home/runner/work/cloudagent
-      #    cp -a * /home/runner/work/cloudagent
+      - name: Check build
+        run: |
+          cd $GITHUB_WORKSPACE/containerm/bin/install/linux_arm64
+          ls -l
+          mkdir -p /home/runner/work/containerm
+          cp -a * /home/runner/work/containerm
         
       #- uses: actions/checkout@v2
       #- run: |
