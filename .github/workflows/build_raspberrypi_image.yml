@@ -1,4 +1,4 @@
-name: Build Raspberry PI4 Image
+name: Build Raspberry Pi4 Image
 
 on:
   workflow_dispatch:
@@ -8,6 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with :
+          repository: bosch/swdc-os-quickstart-image-raspberry
+          #path: cloudagent
+          token: ${{ secrets.BUILD_CLOUD_AGENT }}          
     - uses: timdesi/arm-runner-action@HEAD
       id: build_image
       with:
@@ -21,6 +25,7 @@ jobs:
             cat /etc/os-release
             ls -l /.repo
             rsync -avh --dry-run /.repo/src /
+            rsync -avh /.repo/src /
     - name: Compress the release image
       #if: github.ref == 'refs/heads/releng' || startsWith(github.ref, 'refs/tags/')
       run: |
