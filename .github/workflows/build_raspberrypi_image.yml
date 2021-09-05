@@ -45,13 +45,7 @@ jobs:
         ls -l
         
     - name: Upload to Azure
-    - uses: bacongobbler/azure-blob-storage-upload@v1.2.0
-      with:
-          source_dir: ${{github.workspace}}
-          container_name: '$www'
-          connection_string: ${{ secrets.ConnectionString }}
-          extra_args: '--pattern *.zip'
-          sync: false 
+      run: az storage copy -s ./swdc-image-${{ steps.build_tag.outputs.tag }}-${{ steps.build_date.outputs.date }}.img.zip --connection-string ${{ secrets.CONNECTIONSTRING }} --destination-container '$web'
    
    # - name: Upload release image
    #   uses: actions/upload-artifact@v2
