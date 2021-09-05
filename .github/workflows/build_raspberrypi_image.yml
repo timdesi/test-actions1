@@ -8,10 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-      with :
-          repository: bosch/swdc-os-quickstart-image-raspberry
-          #path: cloudagent
-          token: ${{ secrets.BUILD_CLOUD_AGENT }}
     - name: Download and prepare base image
     - uses: timdesi/arm-runner-action@HEAD
       id: build_image
@@ -26,23 +22,14 @@ jobs:
             cat /etc/os-release
             ls -l /.repo
             rsync -avh /.repo/src /
-    - name: Find our current tag
-    - uses: oprypin/find-latest-tag@v1
-      with:
-          repository: bosch/swdc-os-quickstart-image-raspberry
-          token: ${{ secrets.BUILD_CLOUD_AGENT }}
-          releases-only: false
-          id: builder  
-    - run: echo "Our repo is at version ${{ steps.builder.outputs.tag }}"
     - name: Compress the release image
       #if: github.ref == 'refs/heads/releng' || startsWith(github.ref, 'refs/tags/')
       run: |
-        mv ${{ steps.build_image.outputs.image }} swdc-image-${{ steps.build_image.outputs.tag }}-092021.img
-        #xz -0 -T 0 -v my-release-image.img
-        zip swdc-image-${{ steps.build_image.outputs.tag }}-092021.img
-    #- name: Upload release image
-    #  uses: actions/upload-artifact@v2
+        mv ${{ steps.build_image.outputs.image }} my-release-image.img
+        xz -0 -T 0 -v my-release-image.img
+    - name: Upload release image
+      uses: actions/upload-artifact@v2
       #if: github.ref == 'refs/heads/releng' || startsWith(github.ref, 'refs/tags/')
-    #  with:
-    #    name: Release image
-    #    path: my-release-image.img.xz
+      with:
+        name: Release image
+        path: my-release-image.img.xz
