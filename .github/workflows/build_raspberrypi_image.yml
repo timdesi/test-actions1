@@ -7,6 +7,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - name: Find latest tag
+      uses: oprypin/find-latest-tag@v1
+      with:
+          repository:  bosch/swdc-os-quickstart-image-raspberry
+          releases-only: false 
+          token: ${{ secrets.BUILD_CLOUD_AGENT }}
+      id: build_tag
+    - run: echo "repo is at version ${{ steps.build_tag.outputs.tag }}"
     - uses: actions/checkout@v2
       with :
           repository: bosch/swdc-os-quickstart-image-raspberry
