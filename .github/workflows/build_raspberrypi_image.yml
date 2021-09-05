@@ -11,7 +11,8 @@ jobs:
       with :
           repository: bosch/swdc-os-quickstart-image-raspberry
           #path: cloudagent
-          token: ${{ secrets.BUILD_CLOUD_AGENT }}          
+          token: ${{ secrets.BUILD_CLOUD_AGENT }}
+    - name: Download and prepare base image
     - uses: timdesi/arm-runner-action@HEAD
       id: build_image
       with:
