@@ -31,7 +31,8 @@ jobs:
           repository: bosch/swdc-os-quickstart-image-raspberry
           token: ${{ secrets.BUILD_CLOUD_AGENT }}
           releases-only: false 
-          run: echo "Our repo is at version ${{ steps.build_image.outputs.tag }}"
+          
+    - run: echo "Our repo is at version ${{ steps.build_image.outputs.tag }}"
           
     - name: Compress the release image
       #if: github.ref == 'refs/heads/releng' || startsWith(github.ref, 'refs/tags/')
