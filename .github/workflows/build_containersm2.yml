@@ -1,0 +1,47 @@
+name: Build Containers Management 2
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repo
+      - uses: actions/checkout@v2
+        with :
+          repository: bosch/swdc-os-containers-management
+          token: ${{ secrets.BUILD_CLOUD_AGENT }}
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+            go-version: 1.17
+
+      - name: Install deps
+        run: |
+          sudo apt install libprotobuf-dev protobuf-compiler golang-goprotobuf-dev -y
+          protoc --version
+        
+      - name: Run build script
+        run: | 
+          cd $GITHUB_WORKSPACE/containerm
+          make clean
+          make build-targets-archive
+      
+      - name: Check build
+        run: |
+          cd $GITHUB_WORKSPACE/containerm/bin/install
+          ls -l
+          mkdir -p /home/runner/work/containerm
+          cp -a * /home/runner/work/containerm
+        
+      #- uses: actions/checkout@v2
+      #- run: |
+      #    cd .github
+      #    cp -a /home/runner/work/containerm/ *
+      #    git config user.name github-actions
+      #    git config user.email github-actions@github.com
+      #    git add .
+      #    git commit -m "Auto generated builds"
+      #    git push
