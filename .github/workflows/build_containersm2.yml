@@ -38,19 +38,19 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: containerm.engine-linux-arm.tar.gz
-          path: $GITHUB_WORKSPACE/containerm/bin/archives/*arm.tar.gz
+          path: ${{github.workspace}}/containerm/bin/archives/*arm.tar.gz
     
       - name: Upload artifact linux arm64
         uses: actions/upload-artifact@v2
         with:
           name: containerm.engine-linux-arm64.tar.gz
-          path: $GITHUB_WORKSPACE/containerm/bin/archives/*arm64.tar.gz
+          path: ${{github.workspace}}/containerm/bin/archives/*arm64.tar.gz
     
       - name: Upload artifact linux x86_64
         uses: actions/upload-artifact@v2
         with:
           name: containerm.engine-linux-x86_64.tar.gz
-          path: $GITHUB_WORKSPACE/containerm/bin/archives/*linux-x86_64.tar.gz
+          path: ${{github.workspace}}/containerm/bin/archives/*linux-x86_64.tar.gz
           
      #     mkdir -p /home/runner/work/containerm
      #     cp -a * /home/runner/work/containerm
