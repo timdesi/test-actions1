@@ -31,7 +31,7 @@ jobs:
       
       - name: Check build
         run: |
-          cd $GITHUB_WORKSPACE/containerm/bin/install
+          cd $GITHUB_WORKSPACE/containerm/bin/archives
           ls -l
           mkdir -p /home/runner/work/containerm
           cp -a * /home/runner/work/containerm
