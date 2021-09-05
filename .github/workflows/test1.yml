@@ -28,3 +28,11 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+      
+      - name: Find our current tag
+        uses: oprypin/find-latest-tag@v1
+        with:
+          repository:  ${{ github.repository }}
+          releases-only: false 
+        id: builder  
+      - run: echo "Our repo is at version ${{ steps.builder.outputs.tag }}"
