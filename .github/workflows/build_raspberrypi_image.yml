@@ -8,7 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Download and prepare base image
+      with :
+          repository: bosch/swdc-os-quickstart-image-raspberry
+          token: ${{ secrets.BUILD_CLOUD_AGENT }}
     - uses: timdesi/arm-runner-action@HEAD
       id: build_image
       with:
