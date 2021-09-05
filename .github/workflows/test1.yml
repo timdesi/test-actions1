@@ -38,5 +38,5 @@ jobs:
       - run: echo "Our repo is at version ${{ steps.builder.outputs.tag }}"
       
       - name: Upload to Azure
-        run: az storage blob copy -s ./generated.txt --account-name swdcdownload --sas-token ${{ secrets.SASTOKEN }} --destination-container '$web'
+        run: az storage blob copy -s ./generated.txt --account-name swdcdownload --sas-token ${{ secrets.SASTOKEN }} --destination-container \$web
    
