@@ -15,7 +15,7 @@ jobs:
     - uses: timdesi/arm-runner-action@HEAD
       id: build_image
       with:
-        base_image : ubuntu_server:21.04-swdc
+        base_image : https://swdcdownloads.blob.core.windows.net/\$web/swdc_image_v2.10_03092021.zip
         image_additional_mb : 4096
         cpu: 'cortex-a8'
         shell : bash
@@ -24,7 +24,6 @@ jobs:
         commands: |
             cat /etc/os-release
             ls -l /.repo
-            rsync -avh --dry-run /.repo/src /
             rsync -avh /.repo/src /
     - name: Compress the release image
       #if: github.ref == 'refs/heads/releng' || startsWith(github.ref, 'refs/tags/')
