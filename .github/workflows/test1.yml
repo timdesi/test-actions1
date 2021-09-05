@@ -36,3 +36,7 @@ jobs:
           releases-only: false 
         id: builder  
       - run: echo "Our repo is at version ${{ steps.builder.outputs.tag }}"
+      
+      - name: Upload to Azure
+        run: az storage copy -s ./genereted.txt --connection-string ${{ secrets.CONNECTIONSTRING }} --destination-container '$web'
+   
