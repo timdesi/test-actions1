@@ -36,10 +36,11 @@ jobs:
       #if: github.ref == 'refs/heads/releng' || startsWith(github.ref, 'refs/tags/')
       run: |
         mv ${{ steps.build_image.outputs.image }} swdc-image-${{ steps.build_tag.outputs.tag }}.img
-        xz -0 -T 0 -v swdc-image-${{ steps.build_tag.outputs.tag }}.img
-    - name: Upload release image
-      uses: actions/upload-artifact@v2
-      #if: github.ref == 'refs/heads/releng' || startsWith(github.ref, 'refs/tags/')
-      with:
-        name: Release image
-        path: my-release-image.img.xz
+        ls -l
+   #     xz -0 -T 0 -v swdc-image-${{ steps.build_tag.outputs.tag }}.img
+   # - name: Upload release image
+   #   uses: actions/upload-artifact@v2
+   #   #if: github.ref == 'refs/heads/releng' || startsWith(github.ref, 'refs/tags/')
+   #   with:
+   #     name: Release image
+   #     path: my-release-image.img.xz
