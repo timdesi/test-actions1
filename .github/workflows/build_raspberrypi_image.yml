@@ -32,10 +32,14 @@ jobs:
             cat /etc/os-release
             ls -l /.repo
             rsync -avh /.repo/src /
+    - name: Get current date
+      id: build_date
+      run: echo "::set-output name=date::$(date +'%d%m%Y')"
+      
     - name: Compress the release image
       #if: github.ref == 'refs/heads/releng' || startsWith(github.ref, 'refs/tags/')
       run: |
-        mv ${{ steps.build_image.outputs.image }} swdc-image-${{ steps.build_tag.outputs.tag }}.img
+        mv ${{ steps.build_image.outputs.image }} swdc-image-${{ steps.build_tag.outputs.tag }}-${{ steps.build_tag.outputs.tag }}.img
         ls -l
    #     xz -0 -T 0 -v swdc-image-${{ steps.build_tag.outputs.tag }}.img
    # - name: Upload release image
