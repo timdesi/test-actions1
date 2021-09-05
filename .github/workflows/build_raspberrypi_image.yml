@@ -43,6 +43,16 @@ jobs:
         # xz -0 -T 0 -v swdc-image-${{ steps.build_tag.outputs.tag }}-${{ steps.build_date.outputs.date }}.img
         zip swdc-image-${{ steps.build_tag.outputs.tag }}-${{ steps.build_date.outputs.date }}.img.zip swdc-image-${{ steps.build_tag.outputs.tag }}-${{ steps.build_date.outputs.date }}.img
         ls -l
+        
+    - name: Upload to Azure
+    - uses: bacongobbler/azure-blob-storage-upload@v1.2.0
+      with:
+          source_dir: ${{github.workspace}}
+          container_name: '$www'
+          connection_string: ${{ secrets.ConnectionString }}
+          extra_args: '--pattern *.zip'
+          sync: false 
+   
    # - name: Upload release image
    #   uses: actions/upload-artifact@v2
    #   #if: github.ref == 'refs/heads/releng' || startsWith(github.ref, 'refs/tags/')
