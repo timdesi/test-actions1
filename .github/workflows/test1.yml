@@ -37,14 +37,13 @@ jobs:
         id: builder  
       - run: echo "Our repo is at version ${{ steps.builder.outputs.tag }}"
       
-      - name: Azure ACtion
+      - name: Azure Action
       - uses: bacongobbler/azure-blob-storage-upload@v1.2.0
         with:
           source_dir: './'
           container_name: '$web'
           connection_string: ${{ secrets.ConnectionString }}
           sync: true 
-      - run: echo "test"
           
       - name: Upload to Azure
         run: |
