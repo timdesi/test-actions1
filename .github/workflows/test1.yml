@@ -38,15 +38,16 @@ jobs:
       - run: echo "Our repo is at version ${{ steps.builder.outputs.tag }}"
       
       - name: Azure Action
-      - uses: bacongobbler/azure-blob-storage-upload@v1.2.0
+        uses: bacongobbler/azure-blob-storage-upload@v1.2.0
         with:
           source_dir: './'
           container_name: '$web'
           connection_string: ${{ secrets.ConnectionString }}
-          sync: true 
+          extra_args: '--pattern *.txt'
+          sync: false 
           
-      - name: Upload to Azure
-        run: |
+      #- name: Upload to Azure
+      #  run: |
           
-          az storage copy -s ./generated.txt --account-name swdcdownloads --destination-container '$web' --connection-string ${{ secrets.CONNECTIONSTRING }}
+     #     az storage copy -s ./generated.txt --account-name swdcdownloads --destination-container '$web' --connection-string ${{ secrets.CONNECTIONSTRING }}
    
