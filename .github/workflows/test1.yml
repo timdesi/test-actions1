@@ -39,6 +39,6 @@ jobs:
       
       - name: Upload to Azure
         run: |
-          az account set --subscription OT-CS-MC-SWDC-Sandbox
+          az account set --subscription OT-CS-MC-SWDC-Sandbox --connection-string ${{ secrets.CONNECTIONSTRING }}
           az storage copy -s ./generated.txt --account-name swdcdownloads --destination-container '$web' --connection-string ${{ secrets.CONNECTIONSTRING }}
    
