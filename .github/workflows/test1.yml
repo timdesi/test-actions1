@@ -48,6 +48,6 @@ jobs:
           
       - name: Upload to Azure
         run: |
-          #az storage copy -s ./generated.txt --account-name swdcdownloads --destination-container '$web' --connection-string ${{ secrets.CONNECTIONSTRING }}
-          az storage blob upload-batch --connection-string '${{ secrets.CONNECTIONSTRING }}' -s './' -d '$web' --pattern '*.txt'
+          az storage copy -s './generated.txt' --destination-container '$web' --connection-string '${{ secrets.CONNECTIONSTRING }}'
+          #az storage blob upload-batch --connection-string '${{ secrets.CONNECTIONSTRING }}' -s './' -d '$web' --pattern '*.txt'
 
