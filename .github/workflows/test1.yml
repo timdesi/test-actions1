@@ -46,8 +46,8 @@ jobs:
           extra_args: '--pattern *.txt'
           sync: false 
           
-      #- name: Upload to Azure
-      #  run: |
-          
-     #     az storage copy -s ./generated.txt --account-name swdcdownloads --destination-container '$web' --connection-string ${{ secrets.CONNECTIONSTRING }}
-   
+      - name: Upload to Azure
+        run: |
+          #az storage copy -s ./generated.txt --account-name swdcdownloads --destination-container '$web' --connection-string ${{ secrets.CONNECTIONSTRING }}
+          az storage blob upload-batch --connection-string --connection-string ${{ secrets.CONNECTIONSTRING }} --source ./ --container '$web' --pattern *.txt
+
