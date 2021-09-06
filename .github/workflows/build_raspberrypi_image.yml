@@ -45,8 +45,10 @@ jobs:
         ls -l
         
     - name: Upload to Azure
-      run: az storage copy -s ./swdc-image-${{ steps.build_tag.outputs.tag }}-${{ steps.build_date.outputs.date }}.img.zip --connection-string ${{ secrets.CONNECTIONSTRING }} --destination-container '$web'
-   
+      run: |
+          az storage copy -s 'swdc-image-${{ steps.build_tag.outputs.tag }}-${{ steps.build_date.outputs.date }}.img.zip' --destination-container '$web' --connection-string '${{ secrets.CONNECTIONSTRING }}'
+          #az storage copy -s ./swdc-image-${{ steps.build_tag.outputs.tag }}-${{ steps.build_date.outputs.date }}.img.zip --connection-string ${{ secrets.CONNECTIONSTRING }} --destination-container '$web'
+      
    # - name: Upload release image
    #   uses: actions/upload-artifact@v2
    #   #if: github.ref == 'refs/heads/releng' || startsWith(github.ref, 'refs/tags/')
