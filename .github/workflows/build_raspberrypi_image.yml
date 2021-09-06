@@ -46,7 +46,7 @@ jobs:
         
     - name: Upload to Azure
       run: |
-          az storage copy -s 'swdc-image-${{ steps.build_tag.outputs.tag }}-${{ steps.build_date.outputs.date }}.img.zip' --destination-container '$web' --connection-string '${{ secrets.CONNECTIONSTRING }}'
+          az storage copy -s '${{ steps.build_image.outputs.image }}/swdc-image-${{ steps.build_tag.outputs.tag }}-${{ steps.build_date.outputs.date }}.img.zip' --destination-container '$web' --connection-string '${{ secrets.CONNECTIONSTRING }}'
           #az storage copy -s ./swdc-image-${{ steps.build_tag.outputs.tag }}-${{ steps.build_date.outputs.date }}.img.zip --connection-string ${{ secrets.CONNECTIONSTRING }} --destination-container '$web'
       
    # - name: Upload release image
