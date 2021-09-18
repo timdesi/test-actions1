@@ -31,7 +31,8 @@ jobs:
         commands: |
             cat /etc/os-release
             ls -l /.repo
-            rsync -avh /.repo/src /
+            sudo /usr/bin/machinectl list-images
+            #rsync -avh /.repo/src /
     - name: Get current date
       id: build_date
       run: echo "::set-output name=date::$(date +'%d%m%Y')"
