@@ -31,7 +31,7 @@ jobs:
         commands: |
             cat /etc/os-release
             ls -l /.repo
-            sudo /usr/bin/machinectl list-images
+            #sudo /usr/bin/machinectl list-images
             #rsync -avh /.repo/src /
     - name: Get current date
       id: build_date
