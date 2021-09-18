@@ -22,11 +22,11 @@ jobs:
     - uses: timdesi/arm-runner-action@HEAD
       id: build_image
       with:
-        base_image : https://swdcdownloads.blob.core.windows.net/\$web/swdc_image_v2.10_03092021.zip
+        base_image : https://swdcdownloads.blob.core.windows.net/\$web/swdc_image_v2.12_16092021.img.xz
         image_additional_mb : 4096
-        cpu: 'cortex-a8'
+        cpu: 'cortex-a72'
         shell : bash
-        use_systemd_nspawn: 'no'
+        use_systemd_nspawn: 'yes'
         copy_repository_path : '/.repo'
         commands: |
             cat /etc/os-release
@@ -40,15 +40,14 @@ jobs:
       #if: github.ref == 'refs/heads/releng' || startsWith(github.ref, 'refs/tags/')
       run: |
         mv ${{ steps.build_image.outputs.image }} swdc-image-${{ steps.build_tag.outputs.tag }}-${{ steps.build_date.outputs.date }}.img
-        # xz -0 -T 0 -v swdc-image-${{ steps.build_tag.outputs.tag }}-${{ steps.build_date.outputs.date }}.img
-        zip swdc-image-${{ steps.build_tag.outputs.tag }}-${{ steps.build_date.outputs.date }}.img.zip swdc-image-${{ steps.build_tag.outputs.tag }}-${{ steps.build_date.outputs.date }}.img
+        xz -0 -T 0 -v swdc-image-${{ steps.build_tag.outputs.tag }}-${{ steps.build_date.outputs.date }}.img
+        #zip swdc-image-${{ steps.build_tag.outputs.tag }}-${{ steps.build_date.outputs.date }}.img.zip swdc-image-${{ steps.build_tag.outputs.tag }}-${{ steps.build_date.outputs.date }}.img
         ls -l
         
-    - name: Upload to Azure
-      run: |
-          az storage copy -s './swdc-image-${{ steps.build_tag.outputs.tag }}-${{ steps.build_date.outputs.date }}.img.zip' --destination-container '$web' --connection-string '${{ secrets.CONNECTIONSTRING }}'
-          #az storage copy -s ./swdc-image-${{ steps.build_tag.outputs.tag }}-${{ steps.build_date.outputs.date }}.img.zip --connection-string ${{ secrets.CONNECTIONSTRING }} --destination-container '$web'
-      
+    #- name: Upload to Azure
+    #  run: |
+          #az storage copy -s './swdc-image-${{ steps.build_tag.outputs.tag }}-${{ steps.build_date.outputs.date }}.img.zip' --destination-container '$web' --connection-string '${{ secrets.CONNECTIONSTRING }}'
+          
    # - name: Upload release image
    #   uses: actions/upload-artifact@v2
    #   #if: github.ref == 'refs/heads/releng' || startsWith(github.ref, 'refs/tags/')
