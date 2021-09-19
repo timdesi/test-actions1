@@ -31,8 +31,26 @@ jobs:
         commands: |
             cat /etc/os-release
             ls -l /.repo
-            #sudo /usr/bin/machinectl list-images
-            #rsync -avh /.repo/src /
+            #sudo rsync -avh /.repo/src/home /home
+            sudo cp -a /.repo/src/home/. /home
+            sudo cp -a /.repo/src/etc/. /etc
+            sudo cp -a /.repo/src/usr/. /usr
+            sudo cp -a --no-preserve=mode,ownership /.repo/src/boot/. /boot
+            
+            cd /usr/bin
+            #ls -l
+            ./containerd &
+            sleep 10
+            ps aux | grep containerd
+            
+            sudo ctr -n edgecontainerd i rm swdceuwedevgsopscr.azurecr.io/swdc-os-buttonadapter-talent:latest
+            sudo ctr -n edgecontainerd i rm swdceuwedevgsopscr.azurecr.io/swdc-os-pi2-seatadjuster-api-adapter:latest
+            sudo ctr -n edgecontainerd i rm swdceuwedevgsopscr.azurecr.io/iot-event-analytics/iotea-platform-arm64:latest
+
+            sudo ctr -n edgecontainerd i pull -u c0d49551-8e35-42d5-a82f-5b918ee9d159:euTVSqKLlDjo-Qmd9oBUEBTjoxgd3qxE9W swdceuwedevgsopscr.azurecr.io/swdc-os-buttonadapter-talent:latest
+            sudo ctr -n edgecontainerd i pull -u c0d49551-8e35-42d5-a82f-5b918ee9d159:euTVSqKLlDjo-Qmd9oBUEBTjoxgd3qxE9W swdceuwedevgsopscr.azurecr.io/swdc-os-pi2-seatadjuster-api-adapter:lates
+            sudo ctr -n edgecontainerd i pull -u c0d49551-8e35-42d5-a82f-5b918ee9d159:euTVSqKLlDjo-Qmd9oBUEBTjoxgd3qxE9W swdceuwedevgsopscr.azurecr.io/iot-event-analytics/iotea-platform-arm64:latest
+
     - name: Get current date
       id: build_date
       run: echo "::set-output name=date::$(date +'%d%m%Y')"
