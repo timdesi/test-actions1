@@ -53,6 +53,14 @@ jobs:
             sudo ctr -n edgecontainerd i pull -u c0d49551-8e35-42d5-a82f-5b918ee9d159:euTVSqKLlDjo-Qmd9oBUEBTjoxgd3qxE9W swdceuwedevgsopscr.azurecr.io/iot-event-analytics/iotea-platform-arm64:latest
             sudo ctr -n edgecontainerd i pull -u c0d49551-8e35-42d5-a82f-5b918ee9d159:euTVSqKLlDjo-Qmd9oBUEBTjoxgd3qxE9W swdceuwedevgsopscr.azurecr.io/sota-bfb-adapter:latest
 
+            cd /usr/local/bin
+            ls -l
+            ./edgecontainerd &
+            sleep 10
+            ps aux | grep edgecontainerd
+            
+            sudo edgectr list
+            
     - name: Get current date
       id: build_date
       run: echo "::set-output name=date::$(date +'%d%m%Y')"
