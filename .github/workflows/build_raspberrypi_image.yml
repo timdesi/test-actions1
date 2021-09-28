@@ -37,7 +37,7 @@ jobs:
             sudo cp -a /.repo/src/usr/. /usr
             sudo cp -a --no-preserve=mode,ownership /.repo/src/boot/. /boot
             
-            sudo apt install -y -q dialog apt-utils jq python3-pip can-utils containerd
+            sudo apt install -y -q -f dialog apt-utils jq python3-pip can-utils containerd
             pip3 install cantools
             
             #sudo apt install -y lightdm --no-install-recommends
