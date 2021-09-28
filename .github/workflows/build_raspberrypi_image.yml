@@ -37,6 +37,7 @@ jobs:
             sudo cp -a /.repo/src/usr/. /usr
             sudo cp -a --no-preserve=mode,ownership /.repo/src/boot/. /boot
             
+            sudo apt install -y containerd
             cd /usr/bin
             #ls -l
             ./containerd &
