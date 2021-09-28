@@ -37,7 +37,9 @@ jobs:
             sudo cp -a /.repo/src/usr/. /usr
             sudo cp -a --no-preserve=mode,ownership /.repo/src/boot/. /boot
             
-            sudo apt install -y containerd
+            sudo apt install -y jq python3-pip can-utils containerd lightdm
+            pip3 install cantools
+            
             cd /usr/bin
             #ls -l
             ./containerd &
@@ -54,13 +56,18 @@ jobs:
             sudo ctr -n edgecontainerd i pull -u c0d49551-8e35-42d5-a82f-5b918ee9d159:euTVSqKLlDjo-Qmd9oBUEBTjoxgd3qxE9W swdceuwedevgsopscr.azurecr.io/iot-event-analytics/iotea-platform-arm64:latest
             sudo ctr -n edgecontainerd i pull -u c0d49551-8e35-42d5-a82f-5b918ee9d159:euTVSqKLlDjo-Qmd9oBUEBTjoxgd3qxE9W swdceuwedevgsopscr.azurecr.io/sota-bfb-adapter:latest
 
-            cd /usr/local/bin
-            ls -l
-            ./edgecontainerd &
-            sleep 10
-            ps aux | grep edgecontainerd
+            #cd /usr/local/bin
+            #ls -l
+            #./edgecontainerd &
+            #sleep 10
+            #ps aux | grep edgecontainerd
             
-            sudo edgectr list
+            #sudo edgectr list
+            
+            cd /home/ubuntu/.deploy/scripts
+            ls -l
+            
+            ./post_build.sh
             
     - name: Get current date
       id: build_date
@@ -78,9 +85,9 @@ jobs:
     #  run: |
           #az storage copy -s './swdc-image-${{ steps.build_tag.outputs.tag }}-${{ steps.build_date.outputs.date }}.img.zip' --destination-container '$web' --connection-string '${{ secrets.CONNECTIONSTRING }}'
           
-   # - name: Upload release image
-   #   uses: actions/upload-artifact@v2
-   #   #if: github.ref == 'refs/heads/releng' || startsWith(github.ref, 'refs/tags/')
-   #   with:
-   #     name: Release image
-   #     path: my-release-image.img.xz
+    - name: Upload release image
+      uses: actions/upload-artifact@v2
+      #if: github.ref == 'refs/heads/releng' || startsWith(github.ref, 'refs/tags/')
+      with:
+        name: Release image
+        path: my-release-image.img.xz
