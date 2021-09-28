@@ -22,7 +22,7 @@ jobs:
     - uses: timdesi/arm-runner-action@HEAD
       id: build_image
       with:
-        base_image : https://cdimage.ubuntu.com/releases/21.10/beta/ubuntu-21.10-beta-preinstalled-server-arm64+raspi.img.xz
+        base_image : https://cdimage.ubuntu.com/releases/21.04/release/ubuntu-21.04-preinstalled-server-arm64+raspi.img.xz
         image_additional_mb : 4096
         cpu: 'cortex-a72'
         shell : bash
