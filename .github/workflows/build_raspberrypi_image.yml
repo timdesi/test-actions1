@@ -37,26 +37,26 @@ jobs:
             sudo cp -a /.repo/src/usr/. /usr
             sudo cp -a --no-preserve=mode,ownership /.repo/src/boot/. /boot
             
-            sudo apt install -y -q -f dialog apt-utils jq python3-pip can-utils containerd
-            pip3 install cantools
+            #sudo apt install -y -q -f dialog apt-utils jq python3-pip can-utils containerd
+            #pip3 install cantools
             
             #sudo apt install -y lightdm --no-install-recommends
             
-            cd /usr/bin
+            #cd /usr/bin
             #ls -l
-            ./containerd &
-            sleep 10
-            ps aux | grep containerd
+            #./containerd &
+            #sleep 10
+            #ps aux | grep containerd
             
-            sudo ctr -n edgecontainerd i rm swdceuwedevgsopscr.azurecr.io/swdc-os-buttonadapter-talent:latest
-            sudo ctr -n edgecontainerd i rm swdceuwedevgsopscr.azurecr.io/swdc-os-pi2-seatadjuster-api-adapter:latest
-            sudo ctr -n edgecontainerd i rm swdceuwedevgsopscr.azurecr.io/iot-event-analytics/iotea-platform-arm64:latest
-            sudo ctr -n edgecontainerd i rm swdceuwedevgsopscr.azurecr.io/sota-bfb-adapter:latest
+            #sudo ctr -n edgecontainerd i rm swdceuwedevgsopscr.azurecr.io/swdc-os-buttonadapter-talent:latest
+            #sudo ctr -n edgecontainerd i rm swdceuwedevgsopscr.azurecr.io/swdc-os-pi2-seatadjuster-api-adapter:latest
+            #sudo ctr -n edgecontainerd i rm swdceuwedevgsopscr.azurecr.io/iot-event-analytics/iotea-platform-arm64:latest
+            #sudo ctr -n edgecontainerd i rm swdceuwedevgsopscr.azurecr.io/sota-bfb-adapter:latest
             
-            sudo ctr -n edgecontainerd i pull -u c0d49551-8e35-42d5-a82f-5b918ee9d159:euTVSqKLlDjo-Qmd9oBUEBTjoxgd3qxE9W swdceuwedevgsopscr.azurecr.io/swdc-os-buttonadapter-talent:latest
-            sudo ctr -n edgecontainerd i pull -u c0d49551-8e35-42d5-a82f-5b918ee9d159:euTVSqKLlDjo-Qmd9oBUEBTjoxgd3qxE9W swdceuwedevgsopscr.azurecr.io/swdc-os-pi2-seatadjuster-api-adapter:latest
-            sudo ctr -n edgecontainerd i pull -u c0d49551-8e35-42d5-a82f-5b918ee9d159:euTVSqKLlDjo-Qmd9oBUEBTjoxgd3qxE9W swdceuwedevgsopscr.azurecr.io/iot-event-analytics/iotea-platform-arm64:latest
-            sudo ctr -n edgecontainerd i pull -u c0d49551-8e35-42d5-a82f-5b918ee9d159:euTVSqKLlDjo-Qmd9oBUEBTjoxgd3qxE9W swdceuwedevgsopscr.azurecr.io/sota-bfb-adapter:latest
+            #sudo ctr -n edgecontainerd i pull -u c0d49551-8e35-42d5-a82f-5b918ee9d159:euTVSqKLlDjo-Qmd9oBUEBTjoxgd3qxE9W swdceuwedevgsopscr.azurecr.io/swdc-os-buttonadapter-talent:latest
+            #sudo ctr -n edgecontainerd i pull -u c0d49551-8e35-42d5-a82f-5b918ee9d159:euTVSqKLlDjo-Qmd9oBUEBTjoxgd3qxE9W swdceuwedevgsopscr.azurecr.io/swdc-os-pi2-seatadjuster-api-adapter:latest
+            #sudo ctr -n edgecontainerd i pull -u c0d49551-8e35-42d5-a82f-5b918ee9d159:euTVSqKLlDjo-Qmd9oBUEBTjoxgd3qxE9W swdceuwedevgsopscr.azurecr.io/iot-event-analytics/iotea-platform-arm64:latest
+            #sudo ctr -n edgecontainerd i pull -u c0d49551-8e35-42d5-a82f-5b918ee9d159:euTVSqKLlDjo-Qmd9oBUEBTjoxgd3qxE9W swdceuwedevgsopscr.azurecr.io/sota-bfb-adapter:latest
 
             #cd /usr/local/bin
             #ls -l
