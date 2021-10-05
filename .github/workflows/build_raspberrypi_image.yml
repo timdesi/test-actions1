@@ -22,7 +22,7 @@ jobs:
       
     - name: Get current version
       id: build_version
-      run: echo "::set-output name=version::${{ steps.build_tag.outputs.tag }}_${{ steps.build_date.outputs.date }}"
+      run: echo "::set-output name=version::${{ steps.build_tag.outputs.tag }}_$(date +'%d%m%Y')"
       
     - run: echo "repo is at version ${{ steps.build_version.outputs.version }}"
     
