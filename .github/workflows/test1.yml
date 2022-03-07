@@ -37,17 +37,25 @@ jobs:
         id: builder  
       - run: echo "Our repo is at version ${{ steps.builder.outputs.tag }}"
       
-      - name: Azure Action
-        uses: bacongobbler/azure-blob-storage-upload@v1.2.0
-        with:
-          source_dir: './'
-          container_name: '$web'
-          connection_string: ${{ secrets.ConnectionString }}
-          extra_args: '--pattern *.txt'
-          sync: false 
-          
-      - name: Upload to Azure
+      - name: Populate build variables
+        id: build_vars
         run: |
-          az storage copy -s './generated.txt' --destination-container '$web' --connection-string '${{ secrets.CONNECTIONSTRING }}'
-          #az storage blob upload-batch --connection-string '${{ secrets.CONNECTIONSTRING }}' -s './' -d '$web' --pattern '*.txt'
+          echo ::set-output name=SOURCE_NAME::${GITHUB_REF#refs/*/}
+          echo ::set-output name=SOURCE_BRANCH::${GITHUB_REF#refs/heads/}
+          echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
+          echo ::set-output name=DATE::$(date +'%Y%m%d-%H%M')
+      - name: Show build variables
+        run: |
+          echo SOURCE_NAME: $SOURCE_NAME
+          echo SOURCE_BRANCH: $SOURCE_BRANCH
+          echo SOURCE_TAG: $SOURCE_TAG
+          echo DATE: $DATE
+        env:
+          SOURCE_NAME: ${{ steps.build_vars.outputs.SOURCE_NAME }}
+          SOURCE_BRANCH: ${{ steps.build_vars.outputs.SOURCE_BRANCH }}
+          SOURCE_TAG: ${{ steps.build_vars.outputs.SOURCE_TAG }}
+          DATE: ${{ steps.build_vars.outputs.DATE }}
 
+      - name: Define current version of image
+        id: build_version
+        run: echo "::set-output name=version::${{ steps.build_tag.outputs.tag }}_${{ steps.build_vars.outputs.DATE }}_${{ steps.build_vars.outputs.SOURCE_NAME }}"
