@@ -33,7 +33,8 @@ jobs:
         uses: oprypin/find-latest-tag@v1
         with:
           repository:  ${{ github.repository }}
-          releases-only: false 
+          releases-only: false
+          sort-tags: false
         id: builder  
       - run: echo "Our repo is at version ${{ steps.builder.outputs.tag }}"
       
