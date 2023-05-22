@@ -34,7 +34,7 @@ jobs:
         with:
           repository:  ${{ github.repository }}
           releases-only: false
-          regex: '^\d+\.\d+\.\d+$'
+          regex: '^v\d+\.\d+\.\d+$'
         id: builder  
       - run: echo "Our repo is at version ${{ steps.builder.outputs.tag }}"
       
